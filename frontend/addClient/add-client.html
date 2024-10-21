@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add Client</title>
+    <link rel="stylesheet" href="../styles.css">
+</head>
+<body>
+    <div id="app">
+        <h1>Add Client</h1>
+        <form id="addClientForm">
+            <input type="text" id="clientName" placeholder="Client Name" required>
+            <input type="text" id="policyName" placeholder="Policy Name" required>
+            <input type="number" id="clientId" placeholder="Client ID" required>
+            <input type="text" id="policyId" placeholder="Policy ID" required>
+            <input type="number" id="loanPeriod" placeholder="Loan Period (in years)" required>
+            <input type="text" id="applicationType" placeholder="Application Type (NA, File, Claim)" required>
+            <input type="text" id="currentLevel" placeholder="Current Level (NA, Clerk, Officer, RM, GM)" required>
+            <input type="number" id="noOfClaims" placeholder="Number of Claims" required>
+            <input type="text" id="bankName" placeholder="Bank Name" required>
+            <input type="text" id="bankBranch" placeholder="Bank Branch" required>
+            <input type="text" id="status" placeholder="Status (NA, Pending, Approved, Rejected)" required>
+            <input type="date" id="bankStatementDate" placeholder="Bank Statement Date">
+            <input type="date" id="insurancePolicyDate" placeholder="Insurance Policy Date">
+            <button type="submit">Add Client</button>
+        </form>
+        <a href="../index.html">Back to Home</a>
+    </div>
+    <script src="add-client.js"></script>
+</body>
+</html>
