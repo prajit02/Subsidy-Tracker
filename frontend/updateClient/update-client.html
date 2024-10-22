@@ -1,51 +1,150 @@
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Update Client</title>
     <link rel="stylesheet" href="../styles.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.1/font/bootstrap-icons.css">
+    <style>
+        form {
+            max-width: 1300px;
+            margin: 25px;
+            text-align: left;
+        }
+
+        .form-group {
+            display: flex;
+            justify-content: flex-start;
+            align-items: center;
+            margin-top: 10px;
+        }
+
+        label {
+            flex-basis: 30%;
+            text-align: left;
+            font-size: 16px;
+        }
+
+        input, select {
+            flex-basis: 100%;
+            padding: 10px;
+            font-size: 16px;
+            border-radius: 4px;
+            border: 1px solid #ccc;
+        }
+
+        button {
+            margin-top: 20px;
+            padding: 10px;
+            font-size: 18px;
+            background-color: #3498db;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            width: 40%;
+            align-self: center;
+        }
+
+        button:hover {
+            background-color: #2980b9;
+        }
+    </style>
 </head>
 <body>
-    <form id="updateClientForm">
-        <input type="hidden" id="updateClientId">
-        <label for="updateClientName">Client Name:</label>
-        <input type="text" id="updateClientName" required>
-        
-        <label for="updatePolicyName">Policy Name:</label>
-        <input type="text" id="updatePolicyName" required>
-        
-        <label for="updatePolicyId">Policy ID:</label>
-        <input type="number" id="updatePolicyId" required>
-        
-        <label for="updateLoanPeriod">Loan Period:</label>
-        <input type="number" id="updateLoanPeriod" required>
-        
-        <label for="updateApplicationType">Application Type:</label>
-        <input type="text" id="updateApplicationType" required>
-        
-        <label for="updateCurrentLevel">Current Level:</label>
-        <input type="text" id="updateCurrentLevel" required>
-        
-        <label for="updateNoOfClaims">No. of Claims:</label>
-        <input type="number" id="updateNoOfClaims" required>
-        
-        <label for="updateBankName">Bank Name:</label>
-        <input type="text" id="updateBankName" required>
-        
-        <label for="updateBankBranch">Bank Branch:</label>
-        <input type="text" id="updateBankBranch" required>
-        
-        <label for="updateStatus">Status:</label>
-        <input type="text" id="updateStatus" required>
-        
-        <label for="updateBankStatementDate">Bank Statement Date:</label>
-        <input type="date" id="updateBankStatementDate">
-        
-        <label for="updateInsurancePolicyDate">Insurance Policy Date:</label>
-        <input type="date" id="updateInsurancePolicyDate">
-        
-        <button type="submit">Update Client</button>
-    </form>
+    <!-- Navbar -->
+    <nav>
+        <ul>
+            <li><a href="/index.html"><i class="bi bi-house"></i> Home</a></li>
+        </ul>
+    </nav>
+
+    <!-- App container -->
+    <div id="app">
+        <h1>Update Client</h1>
+        <form id="updateClientForm">
+            <input type="hidden" id="updateClientId">
+
+            <div class="form-group">
+                <label for="updateClientName">Client Name:</label>
+                <input type="text" id="updateClientName" placeholder="Client Name" required>
+            </div>
+
+            <div class="form-group">
+                <label for="updatePolicyName">Policy Name:</label>
+                <input type="text" id="updatePolicyName" placeholder="Policy Name" required>
+            </div>
+
+            <div class="form-group">
+                <label for="updatePolicyId">Policy ID:</label>
+                <input type="number" id="updatePolicyId" placeholder="Policy ID" required>
+            </div>
+
+            <div class="form-group">
+                <label for="updateLoanPeriod">Loan Period (in years):</label>
+                <input type="number" id="updateLoanPeriod" placeholder="Loan Period" required>
+            </div>
+
+            <div class="form-group">
+                <label for="updateApplicationType">Application Type:</label>
+                <select id="updateApplicationType" required>
+                    <option value="NA">NA</option>
+                    <option value="File">File</option>
+                    <option value="Claim">Claim</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label for="updateCurrentLevel">Current Level:</label>
+                <select id="updateCurrentLevel" required>
+                    <option value="NA">NA</option>
+                    <option value="Clerk">Clerk</option>
+                    <option value="Officer">Officer</option>
+                    <option value="Regional Manager (RM)">Regional Manager (RM)</option>
+                    <option value="General Manager (GM)">General Manager (GM)</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label for="updateNoOfClaims">No. of Claims:</label>
+                <input type="number" id="updateNoOfClaims" placeholder="No. of Claims" required>
+            </div>
+
+            <div class="form-group">
+                <label for="updateBankName">Bank Name:</label>
+                <input type="text" id="updateBankName" placeholder="Bank Name" required>
+            </div>
+
+            <div class="form-group">
+                <label for="updateBankBranch">Bank Branch:</label>
+                <input type="text" id="updateBankBranch" placeholder="Bank Branch" required>
+            </div>
+
+            <div class="form-group">
+                <label for="updateStatus">Status:</label>
+                <select id="updateStatus" required>
+                    <option value="NA">NA</option>
+                    <option value="Pending">Pending</option>
+                    <option value="Approved">Approved</option>
+                    <option value="Rejected">Rejected</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label for="updateBankStatementDate">Bank Statement Date:</label>
+                <input type="date" id="updateBankStatementDate">
+            </div>
+
+            <div class="form-group">
+                <label for="updateInsurancePolicyDate">Insurance Policy Date:</label>
+                <input type="date" id="updateInsurancePolicyDate">
+            </div>
+
+            <button type="submit">Update Client</button>
+        </form>
+    </div>
+
     <script src="update-client.js"></script>
 </body>
 </html>
