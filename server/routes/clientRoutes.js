@@ -1,6 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const Client = require('../models/Client');
+const Bank = require('../models/Bank');
 
 // Create a new client
 router.post('/add', async (req, res) => {
@@ -46,4 +47,24 @@ router.get('/:id', async(req, res) => {
   }
 });
 
+
+router.post('/bank/add', async(req, res) => {
+  try{
+    const newBank = new Bank(req.body);
+    await newBank.save();
+    res.status(201).json(newBank);
+  } catch (err) {
+    res.status(400).json({ message: 'Failed to add bank: ' + err.message });
+  }
+});
+
+
+router.get('/bank/all', async(req, res) => {
+  try{
+    const banks = await Bank.find();
+    res.json(banks);
+  } catch (err) {
+    res.status(500).json({ message: 'Error fetching banks: ' + err.message });
+  }
+});
 module.exports = router;

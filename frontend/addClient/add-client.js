@@ -1,3 +1,18 @@
+async function fetchBanks() {
+    const response = await fetch('/api/clients/bank/all');
+    const banks = await response.json();
+
+    const bankSelect = document.querySelector('#bankName');
+    
+    for(let bankObj of banks){
+        let option = document.createElement('option');
+        option.text = bankObj.bankName;
+        option.value = bankObj.bankName;
+        
+        bankSelect.append(option);
+    }
+}
+
 document.getElementById('addClientForm').addEventListener('submit', async (e) => {
     e.preventDefault();
 
@@ -17,7 +32,7 @@ document.getElementById('addClientForm').addEventListener('submit', async (e) =>
         insurancePolicyDate: document.getElementById('insurancePolicyDate').value,
     };
 
-    console.log("new c "+JSON.stringify(newClient))
+    // console.log("new c "+JSON.stringify(newClient))
 
     const response = await fetch('/api/clients/add', {
         method: 'POST',
@@ -34,3 +49,5 @@ document.getElementById('addClientForm').addEventListener('submit', async (e) =>
         alert('Error adding client!');
     }
 });
+
+fetchBanks();
