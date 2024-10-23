@@ -78,12 +78,19 @@
         <h1>Add Bank</h1>
         <form id="addBankForm">
             <div class="form-group">
+                <label for="banks"> Bank Name: </label>
+                <select id="banks" required>
+                    <!-- Fetched from API Call -->
+                </select>
+            </div>
+
+            <div class="form-group">
                 <label for="bankName">Bank Name:</label>
                 <input type="text" id="bankName" placeholder="Bank Name" required>
             </div>
 
             <!-- <div class="button-container"> -->
-                <button type="submit">Add Bank</button>
+                <button type="submit">Add / Update Bank</button>
             <!-- </div> -->
         </form>
     </div>

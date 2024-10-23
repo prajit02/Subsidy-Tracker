@@ -3,7 +3,8 @@ async function fetchBanks() {
     const banks = await response.json();
 
     const bankSelect = document.querySelector('#bankName');
-    
+    document.getElementById('bankName').innerHTML = '';
+
     for(let bankObj of banks){
         let option = document.createElement('option');
         option.text = bankObj.bankName;

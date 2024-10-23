@@ -47,18 +47,6 @@ router.get('/:id', async(req, res) => {
   }
 });
 
-
-router.post('/bank/add', async(req, res) => {
-  try{
-    const newBank = new Bank(req.body);
-    await newBank.save();
-    res.status(201).json(newBank);
-  } catch (err) {
-    res.status(400).json({ message: 'Failed to add bank: ' + err.message });
-  }
-});
-
-
 router.get('/bank/all', async(req, res) => {
   try{
     const banks = await Bank.find();
@@ -67,4 +55,29 @@ router.get('/bank/all', async(req, res) => {
     res.status(500).json({ message: 'Error fetching banks: ' + err.message });
   }
 });
+
+router.post('/bank/add', async(req, res) => {
+  try{
+    const newBank = new Bank(req.body);
+    // console.log(newBank);
+    await newBank.save();
+    res.status(201).json(newBank);
+  } catch (err) {
+    res.status(400).json({ message: 'Failed to add bank: ' + err.message });
+  }
+});
+
+
+router.put('/bank/update/:name', async(req, res) => {
+  try {
+    const updatedBank = await Bank.findOneAndUpdate({bankName: req.params.name}, req.body, { new:true });
+    if(!updatedBank){
+      return res.status(404).json({ message: 'Bank not found' });
+    }
+    res.json(updatedBank);
+  } catch (err) {
+    res.status(500).json({ message: 'Error fetching bank by name: ' + err.message });
+  }
+});
+
 module.exports = router;
