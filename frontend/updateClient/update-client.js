@@ -1,8 +1,24 @@
-// const query  = require('express');
+async function fetchBanks(){
+    const response = await fetch('/api/clients/bank/all');
+    const banks = await response.json();
+
+    const bankSelect = document.querySelector('#updateBankName');
+    document.getElementById('updateBankName').innerHTML = '';
+
+    for(bankObj of banks){
+        let option = document.createElement('option');
+        option.text = bankObj.bankName;
+        option.value = bankObj.bankName;
+
+        bankSelect.append(option);
+    }
+}
 
 document.addEventListener('DOMContentLoaded', async () => {
     const params = new URLSearchParams(window.location.search);
     const clientId = params.get('clientId');
+
+    await fetchBanks();
 
     if (clientId) {
         // Fetch client data based on clientId
@@ -10,7 +26,7 @@ document.addEventListener('DOMContentLoaded', async () => {
         if (response.ok) {
             const client = await response.json();
             // Populate the form with client data
-            document.getElementById('updateClientId').value = client.clientId; // You may want to hide this
+            document.getElementById('updateClientId').value = client.clientId;
             document.getElementById('updateClientName').value = client.clientName || '';
             document.getElementById('updatePolicyName').value = client.policyName || '';
             document.getElementById('updatePolicyId').value = client.policyId || '';
@@ -51,7 +67,7 @@ document.getElementById('updateClientForm').addEventListener('submit', async (e)
         insurancePolicyDate: document.getElementById('updateInsurancePolicyDate').value,
     };
 
-    console.log("cid: "+clientId)
+    // console.log("cid: "+clientId)
 
     const response = await fetch(`/api/clients/update/${clientId}`, {
         method: 'PUT',
