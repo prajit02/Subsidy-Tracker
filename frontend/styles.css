@@ -59,13 +59,21 @@ nav ul li a:hover {
 }
 
 /* Search bar styles */
-input[type="text"] {
+/* input[type="text"] {
   padding: 10px;
   margin: 10px 0;
   border: 1px solid #ccc;
   border-radius: 4px;
   width: calc(100% - 22px);
   font-family: 'Segoe UI', sans-serif;
+} */
+
+input, select {
+  flex-basis: 100%;
+  padding: 10px;
+  font-size: 16px;
+  border-radius: 4px;
+  border: 1px solid #ccc;
 }
 
 /* Table styles */
@@ -75,7 +83,7 @@ table {
   margin-top: 20px;
   overflow-x: auto;
   display: block;
-  max-height: 400px;
+  max-height: 430px;
   overflow-y: scroll;
   font-family: 'Segoe UI', sans-serif;
 }

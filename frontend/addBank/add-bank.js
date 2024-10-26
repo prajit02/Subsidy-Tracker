@@ -27,7 +27,7 @@ document.getElementById('addBankForm').addEventListener('submit', async(e) => {
     const selectedOption = document.getElementById('banks').value;
 
     const newBank = {
-        bankName: document.getElementById('bankName').value
+        bankName: document.getElementById('bankName').value.toUpperCase()
     };
 
     if(selectedOption === 'New Bank'){
