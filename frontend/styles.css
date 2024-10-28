@@ -10,7 +10,10 @@ body {
 nav {
   background-color: #2c3e50;
   padding: 15px 20px;
-  margin: 20px auto;  /* Add margin to create spacing around navbar */
+  margin-left: 40px;  /* Add margin to create spacing around navbar */
+  margin-right: 40px;
+  margin-top: 20px;
+  margin-bottom: 10px;
   max-width: 1400px;  /* Boxed layout */
   border-radius: 8px; /* Rounded corners for the boxed look */
 }
@@ -49,8 +52,8 @@ nav ul li a:hover {
 
 /* App container styles */
 #app {
-  max-width: 1400px;
-  margin: 20px auto;
+  /* max-width: 1400px; */
+  margin: 40px;
   padding: 20px;
   background: #fff;
   border-radius: 8px;
@@ -83,7 +86,7 @@ table {
   margin-top: 20px;
   overflow-x: auto;
   display: block;
-  max-height: 430px;
+  max-height: 450px;
   overflow-y: scroll;
   font-family: 'Segoe UI', sans-serif;
 }
@@ -116,4 +119,11 @@ button {
 
 button:hover {
   background-color: #2980b9;
+}
+
+.form-group {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  margin-top: 10px;
 }

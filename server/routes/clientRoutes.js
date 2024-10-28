@@ -2,6 +2,7 @@ const express = require('express');
 const router = express.Router();
 const Client = require('../models/Client');
 const Bank = require('../models/Bank');
+const Policy = require('../models/Policy');
 
 // Create a new client
 router.post('/add', async (req, res) => {
@@ -47,6 +48,7 @@ router.get('/:id', async(req, res) => {
   }
 });
 
+// Get all banks
 router.get('/bank/all', async(req, res) => {
   try{
     const banks = await Bank.find();
@@ -56,6 +58,7 @@ router.get('/bank/all', async(req, res) => {
   }
 });
 
+// Add new bank
 router.post('/bank/add', async(req, res) => {
   try{
     const newBank = new Bank(req.body);
@@ -67,7 +70,7 @@ router.post('/bank/add', async(req, res) => {
   }
 });
 
-
+// Update bank
 router.put('/bank/update/:name', async(req, res) => {
   try {
     const updatedBank = await Bank.findOneAndUpdate({bankName: req.params.name}, req.body, { new:true });
@@ -77,6 +80,41 @@ router.put('/bank/update/:name', async(req, res) => {
     res.json(updatedBank);
   } catch (err) {
     res.status(500).json({ message: 'Error fetching bank by name: ' + err.message });
+  }
+});
+
+// Get all policies
+router.get('/policy/all', async (req,res) => {
+  try{
+    const policies = await Policy.find();
+    res.json(policies);
+  } catch (err) {
+    res.status(500).json({ message: 'Error fetching policies: ' + err.message });
+  }
+});
+
+// Add policy
+router.post('/policy/add', async(req,res) => {
+  try{
+    const newPolicy = new Policy(req.body);
+
+    await newPolicy.save();
+    res.status(201).json(newPolicy);
+  } catch (err) {
+    res.status(400).json({ message: 'Failed to add policy: ' + err.message });
+  }
+});
+
+// Update policy
+router.put('/policy/update/:name', async(req,res) => {
+  try{
+    const updatedPolicy = await Policy.findOneAndUpdate({policyName: req.params.name}, req.body, { new:true });
+    if(!updatedPolicy){
+      return res.status(404).json({ message: 'Policy not found' });
+    }
+    res.json(updatedPolicy);
+  } catch(err) {
+    res.status(500).json({ message: 'Error fetching policy by name: ' + err.message});
   }
 });
 
