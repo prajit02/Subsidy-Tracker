@@ -2,3 +2,8 @@ List of TODOs:
 1. Enable searching option
 2. Add policy drop down in Add and Update Client pages
 3. Update Client ID and Policy ID to be dynamic
+4. Disable Claim number when selected File as Application Type
+5. Add branch in banks as well
+6. Update clients when bank updates as well
+7. Approval date
+8. Claim Amount , 1. Principal 2. Interest 3. Others(Remark)

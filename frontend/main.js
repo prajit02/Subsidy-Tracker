@@ -98,5 +98,33 @@ function editClient(clientId) {
     window.location.href = `updateClient/update-client.html?clientId=${clientId}`;
 }
 
+async function checkMaxIDs(){
+    const res = await fetch('/api/clients/getmax/all');
+    var maxIds = await res.json();
+    
+    if(!(maxIds && Object.keys(maxIds).length > 0)){
+
+        const maxIdsObj = {
+            maxBankID: 0,
+            maxBankBranchID: 0,
+            maxClientID: 0,
+            maxPolicyID: 0
+        };
+
+        const response = await fetch('/api/clients/getmax/add',{
+            method: 'POST',
+            headers:{
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(maxIdsObj)
+        });
+
+        if(!response.ok) {
+            console.log(response);   
+        }
+    }
+}
+
 // Fetch clients on page load
 fetchClients();
+checkMaxIDs();
