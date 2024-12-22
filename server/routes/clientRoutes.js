@@ -3,6 +3,7 @@ const router = express.Router();
 const Client = require('../models/Client');
 const Bank = require('../models/Bank');
 const Policy = require('../models/Policy');
+const MaxID = require('../models/MaxID');
 
 // Create a new client
 router.post('/add', async (req, res) => {
@@ -115,6 +116,44 @@ router.put('/policy/update/:name', async(req,res) => {
     res.json(updatedPolicy);
   } catch(err) {
     res.status(500).json({ message: 'Error fetching policy by name: ' + err.message});
+  }
+});
+
+router.get('/getmax/all', async(req,res) => {
+  try{
+    const getMax = await MaxID.find();
+    res.json(getMax);
+  } catch (err) {
+    res.status(500).json({message: 'Error fetching MaxIDs ' + err.message});
+  }
+});
+
+router.post('/getmax/add', async(req,res) => {
+  try{
+    const newMaxIds = new MaxID(req.body);
+    
+    await newMaxIds.save();
+    res.status(201).json(newMaxIds);
+  } catch (err) {
+    res.status(400).json({ message: 'Failed to add MaxIDs: ' + err.message});
+  }
+});
+
+router.put('/getmax/update', async(req,res) => {
+  try{
+    const newMaxIds = new MaxID(req.body);
+
+    await newMaxIds.save();
+
+    const deletedRecord = await MaxID.findOneAndDelete({}).sort({ time: 1 });
+    if (!deletedRecord) {
+      console.log({ message: 'No records found to delete' });
+    }
+
+    res.status(201).json(newMaxIds);
+  } catch (err) {
+    console.log(err);
+    res.status(400).json({ message: 'Failed to update MaxIDs: ' + err.message})
   }
 });
 
