@@ -1,3 +1,5 @@
+let maxClientId, maxPolicyId, oldIDs;
+
 async function fetchBanks() {
     const response = await fetch('/api/clients/bank/all');
     const banks = await response.json();
@@ -12,6 +14,20 @@ async function fetchBanks() {
         
         bankSelect.append(option);
     }
+}
+
+async function getmaxIDs() {
+    const maxIDs = await fetch('/api/clients/getmax/all');
+    const IDs = await maxIDs.json();
+    oldIDs = IDs[0];
+    maxClientId = oldIDs.maxClientID + 1;
+    maxPolicyId = oldIDs.maxPolicyID + 1;
+
+    const clientId = document.getElementById('clientId');
+    clientId.value = maxClientId;  
+    
+    const policyId = document.getElementById('policyId');
+    policyId.value = maxPolicyId;
 }
 
 document.getElementById('addClientForm').addEventListener('submit', async (e) => {
@@ -43,12 +59,31 @@ document.getElementById('addClientForm').addEventListener('submit', async (e) =>
         body: JSON.stringify(newClient)
     });
 
-    if (response.ok) {
+    const updateObj = {
+        maxBankID: oldIDs.maxBankID,
+        maxBankBranchID: oldIDs.maxBankBranchID,
+        maxClientID: maxClientId,
+        maxPolicyID: maxPolicyId
+    }
+
+    // console.log("new obj "+JSON.stringify(updateObj))
+
+    const updateIDs = await fetch('/api/clients/getmax/update', {
+        method: 'PUT',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(updateObj)
+    });
+
+    if (response.ok && updateIDs.ok) {
         alert('Client added successfully!');
         document.getElementById('addClientForm').reset();  // Reset the form
+        getmaxIDs();
     } else {
         alert('Error adding client!');
     }
 });
 
 fetchBanks();
+getmaxIDs();
