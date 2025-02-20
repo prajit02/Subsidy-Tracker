@@ -1,4 +1,4 @@
-async function fetchBanks(){
+async function fetchBanks() {
     const response = await fetch('/api/clients/bank/all');
     const banks = await response.json();
 
@@ -14,11 +14,29 @@ async function fetchBanks(){
     }
 }
 
+async function fetchPolicies() {
+    const response = await fetch('/api/clients/policy/all');
+    const policies = await response.json();
+
+    // console.log(policies);
+    const policySelect = document.querySelector('#updatePolicyName');
+    document.getElementById('updatePolicyName').innerHTML = '';
+
+    for(policyObj of policies){
+        let option = document.createElement('option');
+        option.text = policyObj.policyName;
+        option.value = policyObj.policyName;
+
+        policySelect.append(option);
+    }
+}
+
 document.addEventListener('DOMContentLoaded', async () => {
     const params = new URLSearchParams(window.location.search);
     const clientId = params.get('clientId');
 
     await fetchBanks();
+    await fetchPolicies();
 
     if (clientId) {
         // Fetch client data based on clientId
@@ -29,7 +47,7 @@ document.addEventListener('DOMContentLoaded', async () => {
             document.getElementById('updateClientId').value = client.clientId;
             document.getElementById('updateClientName').value = client.clientName || '';
             document.getElementById('updatePolicyName').value = client.policyName || '';
-            document.getElementById('updatePolicyId').value = client.policyId || '';
+            // document.getElementById('updatePolicyId').value = client.policyId || '';
             document.getElementById('updateLoanPeriod').value = client.loanPeriod || '';
             document.getElementById('updateApplicationType').value = client.applicationType || '';
             document.getElementById('updateCurrentLevel').value = client.currentLevel || '';
@@ -55,7 +73,7 @@ document.getElementById('updateClientForm').addEventListener('submit', async (e)
     const updatedData = {
         clientName: document.getElementById('updateClientName').value,
         policyName: document.getElementById('updatePolicyName').value,
-        policyId: document.getElementById('updatePolicyId').value,
+        // policyId: document.getElementById('updatePolicyId').value,
         loanPeriod: document.getElementById('updateLoanPeriod').value,
         applicationType: document.getElementById('updateApplicationType').value,
         currentLevel: document.getElementById('updateCurrentLevel').value,

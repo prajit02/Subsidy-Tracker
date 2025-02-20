@@ -4,6 +4,7 @@ async function fetchBanks() {
     const response = await fetch('/api/clients/bank/all');
     const banks = await response.json();
 
+    // console.log(banks);
     const bankSelect = document.querySelector('#bankName');
     document.getElementById('bankName').innerHTML = '';
 
@@ -13,6 +14,23 @@ async function fetchBanks() {
         option.value = bankObj.bankName;
         
         bankSelect.append(option);
+    }
+}
+
+async function fetchPolicies() {
+    const response = await fetch('/api/clients/policy/all');
+    const policies = await response.json();
+
+    // console.log(policies);
+    const policySelect = document.querySelector('#policyName');
+    document.getElementById('policyName').innerHTML = '';
+
+    for(let policyObj of policies){
+        let option = document.createElement('option');
+        option.text = policyObj.policyName;
+        option.value = policyObj.policyName;
+        
+        policySelect.append(option);
     }
 }
 
@@ -29,6 +47,12 @@ async function getmaxIDs() {
     const policyId = document.getElementById('policyId');
     policyId.value = maxPolicyId;
 }
+
+document.addEventListener('DOMContentLoaded', async () => {
+    await fetchBanks();
+    await fetchPolicies();
+    await getmaxIDs();
+});
 
 document.getElementById('addClientForm').addEventListener('submit', async (e) => {
     e.preventDefault();
@@ -84,6 +108,3 @@ document.getElementById('addClientForm').addEventListener('submit', async (e) =>
         alert('Error adding client!');
     }
 });
-
-fetchBanks();
-getmaxIDs();
